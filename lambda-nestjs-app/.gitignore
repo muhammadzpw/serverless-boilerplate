@@ -1,0 +1,4 @@
+.build/**
+node_modules/**
+.serverless/**
+.DS_Store
