@@ -7,13 +7,13 @@ const serverlessConfiguration: Serverless = {
   },
   plugins: [
     'serverless-plugin-typescript',
-    // 'serverless-plugin-optimize',
+    'serverless-plugin-optimize',
     'serverless-deployment-bucket',
     'serverless-offline',
   ],
   provider: {
     name: 'aws',
-    runtime: 'nodejs12.x',
+    stage: 'v1',
     deploymentBucket: {
       name: 'mzpw-staging',
     },
@@ -21,6 +21,7 @@ const serverlessConfiguration: Serverless = {
   },
   functions: {
     main: {
+      runtime: 'nodejs12.x',
       handler: 'src/lambda.handler',
       events: [
         {
@@ -33,6 +34,18 @@ const serverlessConfiguration: Serverless = {
           http: {
             method: 'ANY',
             path: '{proxy+}',
+          },
+        },
+      ],
+    },
+    auth: {
+      runtime: 'nodejs12.x',
+      handler: 'auth/lambda.handler',
+      events: [
+        {
+          http: {
+            method: 'ANY',
+            path: '/auth/{proxy+}',
           },
         },
       ],

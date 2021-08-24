@@ -22,7 +22,7 @@ async function bootstrap() {
     nestApp.enableCors();
 
     await nestApp.init();
-    console.log('LAMBDA main');
+    console.log('LAMBDA firebase');
 
     cachedServer = serverlessExpress({ app: expressApp });
   }

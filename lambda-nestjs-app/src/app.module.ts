@@ -1,23 +1,15 @@
 import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { join } from 'path';
 import { AppController } from './app.controller';
+import { join } from 'path';
 import { AppService } from './app.service';
+import { FirebaseModule } from './firebase/firebase.module';
 import { UsersModule } from './users/users.module';
 
+// TODO: more secure using secret manager
+const serviceAccount = require('./creds.json');
+
 @Module({
-  imports: [
-    GraphQLModule.forRootAsync({
-      useFactory: () => ({
-        autoSchemaFile: true,
-        // autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-        sortSchema: true,
-        debug: true,
-        playground: true,
-      }),
-    }),
-    UsersModule,
-  ],
+  imports: [UsersModule, FirebaseModule.registerServiceAccount(serviceAccount)],
   controllers: [AppController],
   providers: [AppService],
 })

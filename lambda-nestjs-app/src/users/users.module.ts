@@ -1,8 +1,17 @@
 import { Module } from '@nestjs/common';
-import { UsersResolver } from './users.resolver';
+import { FirebaseUsersService } from '../firebase/firebase-user.service';
+import { FirebaseModule } from '../firebase/firebase.module';
+import { UserController } from './users.controller';
 import { UsersService } from './users.service';
 
 @Module({
-  providers: [UsersResolver, UsersService],
+  imports: [FirebaseModule],
+  controllers: [UserController],
+  providers: [
+    {
+      provide: UsersService,
+      useClass: FirebaseUsersService,
+    },
+  ],
 })
 export class UsersModule {}
