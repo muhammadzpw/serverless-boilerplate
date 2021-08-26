@@ -1,0 +1,14 @@
+{
+  "name": "access_control",
+  "data": {
+    "xxxx": {
+      "id": "xxxx",
+      "userId": "usrid",
+      "dasboards": [
+        "id1",
+        "id2",
+        "id3"
+      ]
+    }
+  }
+}

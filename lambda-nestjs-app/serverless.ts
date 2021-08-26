@@ -13,6 +13,7 @@ const serverlessConfiguration: Serverless = {
   ],
   provider: {
     name: 'aws',
+    memorySize: 128,
     stage: 'v1',
     deploymentBucket: {
       name: 'mzpw-staging',
